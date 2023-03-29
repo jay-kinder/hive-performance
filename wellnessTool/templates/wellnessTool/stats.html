@@ -1,0 +1,43 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+
+{% block title %}Wellness Stats{% endblock %}
+
+{% block content %}
+<div class="content-container">  
+    <div class="container-fluid">  
+        <div class="jumbotron">
+            <h1 class="col-md-12 m-auto">Your Personal Stats Page</h1> 
+            <br>
+            <p class="col-md-12 m-auto"><b>Today's Energy:</b> <span><b>{{ q1_today }}</b></span> | Average Response: {{ q1_average }}</p>
+            <br>
+            <p class="col-md-12 m-auto"><b>Today's Sleep Quality:</b> <span1><b>{{ q2_today }}</b></span1> | Average Response: {{ q2_average }}</p>
+            <br>
+            <p class="col-md-12 m-auto"><b>Today's Mood:</b> <span2><b>{{ q3_today }}</b></span2> | Average Response: {{ q3_average }}</p>
+            <br>
+            <p class="col-md-12 m-auto"><b>Today's Muscle Readiness:</b> <span3><b>{{ q4_today }}</b></span3> | Average Response: {{ q4_average }}</p>
+            <br>
+            <h5 class="col-md-12 m-auto"><b>Today's Wellness Score: <span4>{{ wellness_score_today }}</span4></b> | Average Score: {{ wellness_score_average }}</h5>
+
+            <!-- Checks previous results and changes colour based on if it is more than 1SD away -->
+            <script type="text/javascript" src="{% static 'wellnessTool/wellness-sd-colour.js' %}"></script>
+            <script type="text/javascript">
+                changeColor("{{ q1_check_sd }}", "{{ q1_sd }}", 'span');
+                changeColor("{{ q2_check_sd }}", "{{ q2_sd }}", 'span1');
+                changeColor("{{ q3_check_sd }}", "{{ q3_sd }}", 'span2');
+                changeColor("{{ q4_check_sd }}", "{{ q4_sd }}", 'span3');
+                changeColor("{{ wellness_score_check_sd }}", "{{ wellness_score_sd }}", 'span4');
+            </script>
+
+            <!-- Create Graph based on wellness score -->   
+            <br>
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto" class="border"></div>
+
+            <script type="text/javascript" src="{% static 'wellnessTool/wellness-chart.js' %}"></script>
+            <script type="text/javascript">
+                wellnessLineChart({{ date_submitted|safe }}, {{ wellness_score_31days|safe }})
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

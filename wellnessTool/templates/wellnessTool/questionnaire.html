@@ -1,0 +1,35 @@
+{% extends 'dashboard.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Wellness Questionnaire{% endblock %}
+
+{% block content %}
+<div class="content-container">  
+  <div class="container-fluid">  
+    <div class="jumbotron">
+      <h1 class="col-md-12 m-auto">Wellness Questionnaire <span>
+      {%  if submit_today is True %}
+        <h6><span class="badge badge-success">Completed</span></h6>
+      {% else %}
+        <h6><span class="badge badge-danger">Needs Completing</span></h6>
+      {% endif %}
+      </span></h1>
+
+      <br>
+      <div class="col-md-12 m-auto">
+        <form method="POST"> 
+          {% csrf_token %}
+          {{ form|crispy }}
+          <br>
+          {%  if submit_today is True %}
+            <button type="submit" class="btn btn-warning" disabled>Submit</button>
+          {% else %}
+            <button type="submit" class="btn btn-warning">Submit</button>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
