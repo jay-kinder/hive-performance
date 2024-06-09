@@ -17,7 +17,7 @@ To start the Database for the application, you will need:
 To run the application, on Linux:
 
 ```bash
-git clone https://gitlab.com/jordan-grindrod/hiveperformance.git hiveperformance && cd $_
+git clone https://gitlab.com/jay-kinder/hive-performance.git hive-performance && cd $_
 
 docker-compose pull && docker-compose up -d
 ```
