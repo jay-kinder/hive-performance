@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   hiveapp:
-    image: jordangrindrod/hiveapp
+    image: jaykinder/hiveapp
     build: .
     ports:
       - target: 8000
@@ -12,7 +12,7 @@ services:
     depends_on:
       - hivedb
   hivedb:
-    image: jordangrindrod/hivedb
+    image: jaykinder/hivedb
     build: ./database/.
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
